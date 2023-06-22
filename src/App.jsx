@@ -1,18 +1,11 @@
-import './App.css'
 import { Canvas } from '@react-three/fiber'
-
+import Experience from './components/Experience'
+import * as THREE from 'three'
 function App() {
   return (
-    <div className="App">
-      <Canvas>
-        <mesh>
-          <boxBufferGeometry />
-          <meshPhongMaterial />
-        </mesh>
-        <ambientLight args={[0xff0000]} intensity={0.1} />
-        <directionalLight position={[0, 0, 5]} intensity={0.5} />
-      </Canvas>
-    </div>
+    <Canvas gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1, outputColorSpace: THREE.SRGBColorSpace }}>
+      <Experience />
+    </Canvas>
   )
 }
 
