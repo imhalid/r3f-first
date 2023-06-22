@@ -1,29 +1,20 @@
-import { useFrame, extend, useThree } from '@react-three/fiber'
+import { OrbitControls, TransformControls } from '@react-three/drei'
 import { useRef } from 'react'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 const Experience = () => {
-  extend({ OrbitControls })
-
-  const { camera, gl } = useThree()
-  const meshRef = useRef()
-  const groupRef = useRef()
-  useFrame((state, delta) => {
-    meshRef.current.rotation.y += delta
-    // groupRef.current.rotation.y += delta
-  })
+  const controls = useRef()
   return (
     <>
-      <orbitControls args={[camera, gl.domElement]} />
-
+      <OrbitControls makeDefault />
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <ambientLight intensity={0.5} />
-      <group ref={groupRef}>
+      <group>
         <mesh position-x={-1}>
           <sphereGeometry />
           <meshStandardMaterial color="hotpink" />
         </mesh>
-        <mesh ref={meshRef} position-x={2} rotation-y={Math.PI * 0.25} scale={1.5}>
+        <TransformControls object={controls} />
+        <mesh position-x={2} ref={controls} rotation-y={Math.PI * 0.25} scale={1.5}>
           <boxGeometry />
           <meshStandardMaterial color="orange" />
         </mesh>
